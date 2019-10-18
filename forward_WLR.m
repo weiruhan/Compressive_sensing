@@ -40,7 +40,7 @@ for j = 1:1:spar
 end
 for i = 1:1:size(Y,2)
     X(1:spar,i) = inv(Base'*W(:,:,i)'*W(:,:,i)*Base)*Base'*W(:,:,i)'*W(:,:,i)*Y(:,i);
-end
+    end
 X = X(1:spar,:);
 %% weighted sum of squares
 WSSE = 0;

@@ -34,8 +34,9 @@ end
 plot(penalty,WSSE_WLR);
 str = cellstr(num2str((sum(bas_number~=0,1))'));
 text(penalty,WSSE_WLR,str);
-xlabel('gamma');
+xlabel('gamma');1:
 ylabel('WSSE using WLR');
+title("WSSE with Power = max.weight =10");
 
 %% VISUALIZE signal reconstructed by WLR
 %  Power = max.weight = 10
@@ -89,6 +90,7 @@ str = cellstr(num2str((sum(ML_bas_number~=0,1))'));
 text(1:1:50,ML_SSE,str);
 xlabel('gamma');
 ylabel('least square error');
+title('SSE');
 
 %% Visualize signal reconstructed by MLR (Identity weight in WLR)
 for i = 1:1:50
@@ -108,6 +110,7 @@ end
 co_11_12 = LASSO(basis,ideal,11.12,100);
 %  [1,3,4,5,6,8,9,12,13,16,17,18,20,23,24,25]
 plot(basis*co_11_12);
+title("lasso with sparsity 16");
 hold on
 plot(ideal);
 hold off
