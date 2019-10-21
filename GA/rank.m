@@ -2,7 +2,7 @@
 
 function rank(population_size, chromo_size)
 global fitness_value;   
-global fitness_sum;     % accumulated fitness value
+global fitness_sum;     % accumulated population fitness value
 global fitness_average;
 global best_fitness;
 global best_individual;
@@ -34,8 +34,8 @@ for i=1:population_size
         fitness_value(max_index) = temp;
         
         
-        % exchange population(i) and population(min_index) ?chromosome
-        for k = 1:chromosome_size
+        % exchange population(i) and population(min_index)
+        for k = 1:chromo_size
             temp_chromosome(k) = population(i,k);
             population(i,k) = population(max_index,k);
             population(max_index,k) = temp_chromosome(k);
@@ -56,7 +56,7 @@ end
 fitness_average(G) = fitness_sum(population_size)/population_size;
 
 %
-if fitness_value(population_size) > best_fitness
+if fitness_value(population_size) < best_fitness
     best_fitness = fitness_value(population_size);
     best_generation = G;
     for j=1:chromo_size

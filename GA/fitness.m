@@ -6,7 +6,7 @@
 % power is weight power
 % Max is maximum weight
 
-function fitness(population_size,chromo_size,D,Y,option,power,Max)
+function fitness(population_size,D,Y,option,power,Max)
 global fitness_value;
 global population;
 
@@ -16,7 +16,7 @@ for i = 1:population_size
 end
 
 for i = 1:population_size
-    D_new = D * population(i,:);
+    D_new = D * diag(population(i,:));
     [~,idx] = find(D_new);
     D_new = D_new(:,unique(idx)); % sparse dictionary
     [~,fitness_value(i)] = WLR(D_new,Y,option,power,Max); 
