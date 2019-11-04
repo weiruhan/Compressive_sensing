@@ -1,19 +1,21 @@
 % single point mutation operation
 % mutate_rate: probability of mutation operation
 
-function mutation(population_size,chromo_size,mutate_rate)
+function mutation(population_size)
+
 global population;
+global population_new;
 
 for i=1:population_size
-    if rand < mutate_rate
-        mutate_position = round(rand*chromo_size);  % mutation position
-        if mutate_position == 0
-            % abandon mutation if mutate_position == 0
-            continue;
-        end
-        population(i,mutate_position) = 1 - population(i, mutate_position);
-    end
+    [~,zero_idx] = find(~population(i,:)); % zero index
+    [~,nonzero_idx] = find(population(i,:));% nonzero index
+    population_new(0.5*population_size+i,:) = population(i,:);
+    % randomly swap 0/1 to 1/0 
+    population_new(0.5*population_size+i,randsample(zero_idx,1))=1;
+    population_new(0.5*population_size+i,randsample(nonzero_idx,1))=0;
+     
 end
 
 clear i;
-clear mutate_position;
+clear zero_idx;
+clear nonzero_idx
