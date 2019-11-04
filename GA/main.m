@@ -4,14 +4,13 @@ Y = ideal;
 option = "nonlinear";
 power = 10;
 Max = 10;
-k = 16;
+k = 9;
 population_size = 10;      
 chromo_size = 32;       
-generation_size = 100;      
-cross_rate = 0.6;          
-mutate_rate = 0.01;         
+generation_size = 20;      
+     
 
-[best_individual,best_fitness,iterations] = genetic_algorithm(population_size, chromo_size, generation_size, cross_rate, mutate_rate,D,Y,option,power,Max,k);
+[best_individual,best_fitness,iterations] = genetic_algorithm(population_size, chromo_size, generation_size,D,Y,option,power,Max,k);
 
 best_basis = basis*diag(best_individual);
 [~,best_basis_idx] = find(best_basis);
