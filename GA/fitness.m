@@ -8,15 +8,19 @@
 
 function fitness(population_size,D,Y,option,power,Max)
 global fitness_value;
-global population;
+global population_new;
 
 % initialize population fitness values
-for i = 1:population_size
+for i = 1:(2.5*population_size)
     fitness_value(i)=0;
 end
 
-for i = 1:population_size
-    D_new = D * diag(population(i,:));
+for i = 1:(2.5*population_size)
+    D_new = D * diag(population_new(i,:));
+    if unique(D_new)==0
+        fitness_value(i) = Inf;
+        continue
+    end
     [~,idx] = find(D_new);
     D_new = D_new(:,unique(idx)); % sparse dictionary
     [~,fitness_value(i)] = WLR(D_new,Y,option,power,Max); 
