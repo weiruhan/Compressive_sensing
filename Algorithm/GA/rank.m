@@ -9,6 +9,7 @@ global best_individual;
 global best_generation;
 global G;
 global population_new;
+global optimal_fitness;
 
 for i=1:(2.5*population_size)
     fitness_sum(i) = 0;
@@ -61,6 +62,7 @@ if fitness_value(2.5*population_size) < best_fitness
         best_individual(j) = population_new(2.5*population_size,j);
     end
 end
+optimal_fitness(G) = fitness_value(2.5*population_size);
 
 
 clear i;

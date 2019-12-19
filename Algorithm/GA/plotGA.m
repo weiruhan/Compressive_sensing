@@ -1,10 +1,10 @@
 % Export generation process
 
 function plotGA(generation_size)
-global fitness_average;
+global optimal_fitness;
 x = 1:1:generation_size;
-y = fitness_average;
+y = optimal_fitness;
 plot(x,y)
-title("average fitness tendency")
+title("best fitness tendency")
 xlabel("generation")
 ylabel("weighted SSE")

@@ -10,9 +10,12 @@ global best_individual;
 global best_generation; 
 global population_new;
 global population;
+global optimal_fitness;
 
 
-fitness_average = zeros(generation_size,1); 
+fitness_average = zeros(generation_size,1);
+optimal_fitness = zeros(generation_size,1);
+
 
 fitness_value(2.5*population_size) = 0;
 best_fitness = Inf;
