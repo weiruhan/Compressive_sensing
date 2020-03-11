@@ -1,6 +1,6 @@
-% rank population fitness value and store best individuals
+% Rank population fitness value and store best individuals
 
-function rank(population_size, chromo_size)
+function rank(population_size)
 global fitness_value;   
 global fitness_sum;     
 global fitness_average;
@@ -11,12 +11,6 @@ global G;
 global population_new;
 global optimal_fitness;
 
-for i=1:(2.5*population_size)
-    fitness_sum(i) = 0;
-end
-
-
-temp_chromosome(chromo_size)=0;
 
 for i=1:(2.5*population_size)
     max_index = i;
@@ -32,42 +26,35 @@ for i=1:(2.5*population_size)
         fitness_value(i) = fitness_value(max_index);
         fitness_value(max_index) = temp;
         
-        
         % exchange population_new(i) and population_new(max_index)
-        for k = 1:chromo_size
-            temp_chromosome(k) = population_new(i,k);
-            population_new(i,k) = population_new(max_index,k);
-            population_new(max_index,k) = temp_chromosome(k);
-        end
+        temp_chromosome = population_new(i,:);
+        population_new(i,:) = population_new(max_index,:);
+        population_new(max_index,:) = temp_chromosome;
     end
 end
 
 % fitness_sum
-for i=1:(2.5*population_size)
-    if i==1
-        fitness_sum(i) = fitness_sum(i) + fitness_value(i);    
-    else
-        fitness_sum(i) = fitness_sum(i-1) + fitness_value(i);
-    end
-end
+fitness_sum = cumsum(fitness_value);
 
 % fitness_average(G) = average fitness at G's generation
 fitness_average(G) = fitness_sum(2.5*population_size)/(2.5*population_size);
 
-%
+% best population and best fitness
 if fitness_value(2.5*population_size) < best_fitness
     best_fitness = fitness_value(2.5*population_size);
     best_generation = G;
-    for j=1:chromo_size
-        best_individual(j) = population_new(2.5*population_size,j);
-    end
+    best_individual = population_new(2.5*population_size,:);
 end
+
 optimal_fitness(G) = fitness_value(2.5*population_size);
 
 
-clear i;
-clear j;
-clear k;
-clear max_index;
-clear temp;
-clear temp_chromosome;
+clear i
+clear j
+clear k
+clear max_index
+clear temp
+clear temp_chromosome
+
+
+
