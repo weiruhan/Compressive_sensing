@@ -5,7 +5,7 @@ function [X,order,Base,WSSE] =fwd_wlr(dic,Y,W,spar)
 % dic is dictionary; 
 % Y is input signals;
 % option is weight criteria;
-% power is power value in nonlinear 0function;
+% power is power value in nonlinear function;
 % Max is the max weight value;
 % spar is the sparsity
 
