@@ -119,8 +119,6 @@ for power = [5,10,25,50]
         plot(sub_fwd_info.max_weight,sub_fwd_info.WSSE,'k');
         grid on
         title(sprintf("%s=%d\n%d-%s",'power',power,sparsity,'sparsity'));
-        %xlabel('max\_weight');
-        %ylabel('WSSE');
         ylim([0.005,0.035]);
     end
 end
@@ -132,4 +130,4 @@ h5.YLabel.Visible = 'on';
 axes(h5);
 ylabel('WSSE');
 xlabel('max\_weight');
-saveas(h,sprintf('subplot.png'));
+
