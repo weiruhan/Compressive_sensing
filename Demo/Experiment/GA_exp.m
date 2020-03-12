@@ -36,10 +36,10 @@ for max_weight = [5,10,25,50]
     end
 end
 
-% average runtime
+%% average runtime
 GA_average_time = mean([GA_time{:}]);
 
-% peak residual and peak location residual
+%% peak residual and peak location residual
 GA_peak_res = cell(48,1);
 GA_location_deviation = cell(48,1);
 
@@ -53,14 +53,12 @@ for i = 1:48
     GA_location_deviation{i} = mean(abs(index-location));
 end
 
-
 clear i;
 clear res;
 clear idx;
 clear index;
 
-
-% scatter plot base index
+%% scatter plot base index
 GA_base_comp = [];
 for i = 1:48
     nrow = size(GA_order{i},2);
@@ -74,6 +72,26 @@ ylabel("basis index");
 
 clear nrow;
 
+%% Visualize signal
+i = 0;
+for max_weight = [5,10,25,50]
+    for power = [5,10,25,50]
+        for sparsity = [16,12,9]
+            i = i+1;
+            h = figure;
+            plot(GA_signal{i});
+            hold on
+            plot(ideal);
+            txt = sprintf("%s=%d\n%s=%d\n%d-%s",'max\_weight',max_weight,...
+                'power',power,sparsity,'sparse');
+            title(txt);
+            hold off
+            saveas(h,sprintf('%d%s_%d%s.png',i,'train',size(GA_Base{i},2),'sparse'));
+            close(h);
+        end
+    end
+end
+clear txt
 
 
 
