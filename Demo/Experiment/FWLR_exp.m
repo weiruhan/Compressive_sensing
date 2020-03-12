@@ -10,9 +10,10 @@ for max_weight = [5,10,25,50]
     for power = [5,10,25,50]
         for sparsity = [16,12,9]
             i = i+1;
+            W = weight(ideal,'nonlinear',power,max_weight);
             tic;
             [fwd_coeff{i},fwd_order{i},fwd_Base{i},fwd_WSSE{i}]=...
-                forward_WLR(basis,ideal,'nonlinear',power,max_weight,sparsity);
+                fwd_wlr(basis,ideal,W,sparsity);
             fwd_time{i} = toc;
             fwd_signal{i} = fwd_Base{i} * fwd_coeff{i};
         end
@@ -51,11 +52,11 @@ for i = 1:48
     fwd_base_comp = [fwd_base_comp; temp]; % concatenation
 end
 scatter(fwd_base_comp(:,1),fwd_base_comp(:,2));
-title("basis index scatter plot");
-xlabel("group");
-ylabel("basis index");
+title("basis index scatter plot")
+xlabel("group")
+ylabel("basis index")
 
-clear nrow;
+clear nrow
 
 
 
