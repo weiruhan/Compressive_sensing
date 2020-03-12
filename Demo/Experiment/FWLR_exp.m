@@ -22,7 +22,7 @@ end
 
 fwd_average_time = mean([fwd_time{:}]); % average runtime
 
-% peak residual and peak location residual
+%% peak residual and peak location residual
 fwd_peak_res = cell(48,1);
 fwd_location_deviation = cell(48,1);
 
@@ -44,7 +44,7 @@ clear index;
 
 
 
-% scatter plot base index
+%% scatter plot base index
 fwd_base_comp = [];
 for i = 1:48
     nrow = size(fwd_order{i},1);
@@ -58,6 +58,25 @@ ylabel("basis index")
 
 clear nrow
 
-
+%% Visualize signal
+i = 0;
+for max_weight = [5,10,25,50]
+    for power = [5,10,25,50]
+        for sparsity = [16,12,9]
+            i = i+1;
+            h = figure;
+            plot(fwd_signal{i});
+            hold on
+            plot(ideal);
+            txt = sprintf("%s=%d\n%s=%d\n%d-%s",'max\_weight',max_weight,...
+                'power',power,sparsity,'sparse');
+            title(txt);
+            hold off
+            saveas(h,sprintf('%d%s_%d%s.png',i,'train',sparsity,'sparse'));
+            close(h);
+        end
+    end
+end
+clear txt
 
 
