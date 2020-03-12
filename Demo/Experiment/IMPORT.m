@@ -1,4 +1,4 @@
-% IMPORT DATA
+%% IMPORT DATA
 
 ideal=textread("sort_desired_r_c.txt"); % ideal spectrum 7 ideal spectrums
 basis=textread("sort_loaded_basis.txt"); % 32 basis each with 951*1
