@@ -86,7 +86,7 @@ for max_weight = [5,10,25,50]
                 'power',power,sparsity,'sparse');
             title(txt);
             hold off
-            saveas(h,sprintf('%d%s_%d%s.png',i,'train',size(GA_Base{i},2),'sparse'));
+            saveas(h,sprintf('%d%s_%d%s.png',i,'train',sparsity,'sparse'));
             close(h);
         end
     end
