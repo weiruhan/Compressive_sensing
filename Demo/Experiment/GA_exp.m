@@ -94,5 +94,58 @@ end
 clear txt
 
 
+%% Visualize relation between WSSE & weight & sparsity
+i = 0;
+ga_info = zeros(size(GA_signal,1),4);
+for max_weight = [5,10,25,50]
+    for power = [5,10,25,50]
+        for sparsity = [16,12,9]
+            i = i+1;
+            ga_info(i,:) = [sparsity,power,max_weight,GA_WSSE{i}];
+        end
+    end
+end
+% convert array to table
+ga_info = array2table(ga_info,'variablenames',{'sparsity','power','max_weight','WSSE'});
+
+for power = [5,10,25,50]
+    for sparsity = [16,12,9]
+        sub_ga_info = ga_info(ga_info.power == power & ga_info.sparsity == sparsity,:);
+        h = figure;
+        plot(sub_ga_info.max_weight,sub_ga_info.WSSE,'k');
+        grid on
+        title(sprintf("%s=%d\n%d-%s",'power',power,sparsity,'sparsity'));
+        xlabel('max\_weight');
+        ylabel('WSSE');
+        saveas(h,sprintf('%s%d_%d%s.png','power',power,sparsity,'sparse'));
+        close(h);
+    end
+end
+
+%% subplot
+i = 0;
+position = cell(12,1);
+for power = [5,10,25,50]
+    for sparsity = [16,12,9]
+        i = i+1;
+        sub_ga_info = ga_info(ga_info.power == power & ga_info.sparsity == sparsity,:);
+        h = subplot(4,3,i);
+        position{i} = get(h,'position');
+        plot(sub_ga_info.max_weight,sub_ga_info.WSSE,'k');
+        grid on
+        title(sprintf("%s=%d\n%d-%s",'power',power,sparsity,'sparsity'));
+        ylim([0.005,0.035]);
+    end
+end
+height = position{1}(2)+position{1}(4)-position{12}(2);
+width = position{12}(1)+position{12}(3)-position{1}(1);
+h5 = axes('position',[position{10}(1) position{10}(2) width height],'visible','off');
+h5.XLabel.Visible = 'on';
+h5.YLabel.Visible = 'on';
+axes(h5);
+ylabel('WSSE');
+xlabel('max\_weight');
+
+
 
 
